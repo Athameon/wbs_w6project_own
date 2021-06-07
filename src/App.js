@@ -42,7 +42,7 @@ function App() {
       <Switch>
         <Route path="/error" component={Error} />
         <Route path="/">
-        { isLoading? 
+          { isLoading? 
             <LoadingComponent /> :
             isError?
             <Redirect to="/error" /> :
