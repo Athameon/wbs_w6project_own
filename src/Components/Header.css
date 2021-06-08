@@ -1,0 +1,60 @@
+.prenav {
+    display: flex;
+    align-items: center;
+    height: 150px;
+    background-color: rgb(51, 44, 87);
+    color: white;
+}
+
+.prenav h1{
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+}
+
+#blchainlogo{
+    margin-left: 15px;
+    margin-right: 2px;
+}
+
+.navbar {
+    background-color: rgb(233, 206, 98);
+    color: black;
+    margin-bottom: 20px;
+}
+
+.nav_ticker{
+    margin-left: 240px;
+}
+
+tr{
+    line-height: 23px;
+    color: white;
+    /* min-height: 25px; */
+    /* height: 25px; */
+}
+
+th{
+    min-width: 100px;
+}
+
+tbody{
+    vertical-align: middle;
+}
+
+table{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif;
+    /* font-weight: lighter; */
+}
+
+#currency_labels{
+    color:rgb(243, 202, 37);
+}
+
+/* rgb(248,221,116) */
+
+/* .dropdown-item {
+    font-size: 18px;
+} */
+

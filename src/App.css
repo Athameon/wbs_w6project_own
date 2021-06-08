@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;1,100&display=swap');
+
+body{
+    margin: 0;
+    font-family: 'Archivo', sans-serif;
+}
