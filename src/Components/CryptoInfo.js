@@ -3,6 +3,7 @@ import Data from '../Mock.json';
 
 const CryptoInfo = () => {
   const [values, setCurrentData] = useState(null);
+  const priceDelta = useRef(0)
   const prevData = useRef(null);
   // setCurrentData(Data);
 
@@ -23,7 +24,12 @@ const CryptoInfo = () => {
         throw Error("Network Error");
       }))
       .then(jsonData => {
-        setCurrentData(jsonData[0]);
+        if (priceDelta.current !== jsonData[0].price) {
+          console.log("Update price");
+          setCurrentData(jsonData[0]);
+          priceDelta.current = jsonData[0].price;
+        }
+        
       })
       .catch(error => {
         console.error("Failed to fetch the data.");
@@ -69,7 +75,7 @@ const CryptoInfo = () => {
         <p>{values.currency}</p>
         <h2>Price (€):</h2>
         <p>{values.price} {prevData.current === null? "-" : values.price === prevData.current.price? "O" :  values.price > prevData.current.price? "+" : "-"}</p>
-        <p>{prevData.current && values.price - prevData.current.price}</p>
+        <p>{prevData.current && values.price - prevData.current.price > 0 && "+"}{prevData.current && values.price - prevData.current.price}</p>
         <h2>First Trade:</h2>
         <p>{values.first_trade}</p>
         <h2>Alltime high date:</h2>
