@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import blockchain_logo from "./../assets/icon_blockchain.png"
+import "./Header.css"
 
 const Header = (props) => {
   const [searchInput, setSearchInput] = useState("");
