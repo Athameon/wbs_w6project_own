@@ -1,6 +1,8 @@
 import React from 'react';
 import CryptoInfo from './CryptoInfo';
 import { useParams } from 'react-router-dom';
+import marked from 'marked'
+
 import './Crypto.css'
 
 
@@ -23,7 +25,7 @@ const Crypto = ({items}) => {
         <div className='cryptoDescription'>
           <h1>{crypto.fields.title}</h1>
           <img src={image.file.url} alt={image.title} />
-          <p>{crypto.fields.description}</p>
+          <section dangerouslySetInnerHTML={{ __html: marked(crypto.fields.description)}} />
         </div>
       </div>
     )
