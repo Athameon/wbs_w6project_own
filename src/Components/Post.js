@@ -14,7 +14,7 @@ const Post = (item) => {
   return (
     <div className='post'>
       <div className='post_header'>
-        <Link className='user' to={author && author.name}>
+        <Link className='user' to={author && '/authors/' + author.name}>
           <img src={picture && picture} alt={author && author.name} />
           <p className='username'>{author && author.name}</p>
         </Link>
