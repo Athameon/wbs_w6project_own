@@ -1,0 +1,26 @@
+h1 {
+  text-align: center;
+}
+
+.profilePicture {
+  width: 500px;
+  display: block;
+  margin: 10px auto;
+}
+
+.aboutText {
+  text-align: center;
+}
+
+.articleSeparator {
+  position: relative;
+  top: 20px;
+  margin-bottom: 50px;
+  color: #e9ce62;
+  border: 5px solid #e9ce62;
+  background-color: #e9ce62; /* Modern Browsers */
+  border-radius: 5px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}

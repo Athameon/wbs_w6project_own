@@ -1,12 +1,22 @@
 import React from 'react';
-import Post from './Post';
+import News from './News';
+import Author from './Author';
+import { Switch, Route } from 'react-router-dom';
+import './Main.css'
 
 const Main = ({content}) => {
   console.log(content.items);
-  const posts = content.items.filter(item => item.sys.contentType.sys.id === 'post');
   return(
-    <main>
-      {posts.map(item => <Post key={item.sys.id} {...item} />)}
+    <main className="mainWidth center">
+      <Switch>
+        <Route path="/authors/:name">
+          <Author {...content} />
+        </Route>
+        <Route path="/">
+          <News {...content} />
+        </Route>
+      </Switch>
+      
     </main>
   )
 }
