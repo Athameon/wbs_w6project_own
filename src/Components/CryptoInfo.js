@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Data from '../Mock.json';
+import LoadingComponent from './LoadingComponent';
 
 const CryptoInfo = () => {
   const [values, setCurrentData] = useState(null);
@@ -95,7 +96,12 @@ const CryptoInfo = () => {
       </aside>
     )
   } else {
-    return <p>Empty</p>
+    return ( 
+      <>
+        <h2>Crypto Info</h2>
+        <LoadingComponent />
+      </>
+    )
   }
 
 }

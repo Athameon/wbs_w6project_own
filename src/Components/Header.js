@@ -96,18 +96,18 @@ const Header = (props) => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  First
+                  Cryptos
                 </div>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <div className="dropdown-item" name="first">
-                      First-First
-                    </div>
+                    <Link to='/crypto/btc'>
+                      <span>Bitcoin</span>
+                    </Link>
                   </li>
                   <li>
-                    <div className="dropdown-item" name="first">
-                      First-Second
-                    </div>
+                    <Link to='/crypto/eth'>
+                      <span>Etherium</span>
+                    </Link>
                   </li>
                 </ul>
               </li>
