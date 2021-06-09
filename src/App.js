@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header content={content}/>
       <Switch>
         <Route path="/error" component={Error} />
         <Route path="/">

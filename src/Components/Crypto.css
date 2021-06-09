@@ -1,0 +1,27 @@
+.cryptoContainer {
+  display: flex;
+}
+.cryptoDescription img {
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+}
+.cryptoDescription p {
+  margin-top: 20px;
+  font-size: 18px;
+  padding: 10px;
+}
+.cryptoDescription h1 {
+  color: #332c57;
+  text-shadow: 3px 3px 3px #e9ce62;
+}
+
+.cryptoInfoContainer {
+  min-width: 320px;
+  margin-right: 20px;
+  padding: 15px;
+  border: solid 5px #332c57;
+  box-shadow: 10px 10px 15px #e9ce62;
+  border-radius: 20px;
+  background-color: #eeeeee;
+}

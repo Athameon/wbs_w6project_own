@@ -9,6 +9,8 @@ const Header = (props) => {
     setSearchInput(target.value);
   };
 
+  const cryptos = props.content && props.content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
+
   return (
     <header>
 
@@ -96,19 +98,18 @@ const Header = (props) => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  First
+                  Cryptos
                 </div>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <div className="dropdown-item" name="first">
-                      First-First
-                    </div>
-                  </li>
-                  <li>
-                    <div className="dropdown-item" name="first">
-                      First-Second
-                    </div>
-                  </li>
+                  {cryptos && cryptos.map(item => {
+                    return (
+                      <li>
+                        <Link to={'/crypto/' + item.fields.id}>
+                          <span>{item.fields.title}</span>
+                        </Link>
+                      </li>
+                    )
+                  })}
                 </ul>
               </li>
               <li className="nav-item dropdown">
