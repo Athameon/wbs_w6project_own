@@ -9,6 +9,8 @@ const Header = (props) => {
     setSearchInput(target.value);
   };
 
+  const cryptos = props.content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
+
   return (
     <header>
 
@@ -99,16 +101,15 @@ const Header = (props) => {
                   Cryptos
                 </div>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <Link to='/crypto/btc'>
-                      <span>Bitcoin</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to='/crypto/eth'>
-                      <span>Etherium</span>
-                    </Link>
-                  </li>
+                  {cryptos.map(item => {
+                    return (
+                      <li>
+                        <Link to={'/crypto/' + item.fields.id}>
+                          <span>{item.fields.title}</span>
+                        </Link>
+                      </li>
+                    )
+                  })}
                 </ul>
               </li>
               <li className="nav-item dropdown">
