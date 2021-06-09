@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import blockchain_logo from "./../assets/icon_blockchain.png"
+import { Link } from 'react-router-dom';
 import "./Header.css"
 
 const Header = (props) => {
@@ -12,11 +13,11 @@ const Header = (props) => {
     <header>
 
       <div className="prenav">
-        <div className="logoImage"></div>
-
+        <Link className="logoImage" to='/'>
             <img src={blockchain_logo} alt="blockchain logo" id="blchainlogo"/>
+        </Link>
         
-        <div className="logoText">
+        <Link className="logoText" to='/'>
             <div className="container">
                 <div className="row">
                     <h1>The Daily Crypto</h1>
@@ -25,7 +26,7 @@ const Header = (props) => {
                     <h3 className="fs-6 text-end">Powered by React & Contentful</h3>
                 </div>
             </div>
-        </div>
+        </Link>
         
         <div className="nav_ticker">
 
