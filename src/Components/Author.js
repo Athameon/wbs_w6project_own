@@ -1,5 +1,4 @@
 import React from 'react';
-import Post from './Post';
 import { useParams } from 'react-router-dom';
 import marked from 'marked'
 import './Author.css'
