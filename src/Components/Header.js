@@ -9,7 +9,7 @@ const Header = (props) => {
     setSearchInput(target.value);
   };
 
-  const cryptos = props.content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
+  const cryptos = props.content && props.content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
 
   return (
     <header>
@@ -101,7 +101,7 @@ const Header = (props) => {
                   Cryptos
                 </div>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  {cryptos.map(item => {
+                  {cryptos && cryptos.map(item => {
                     return (
                       <li>
                         <Link to={'/crypto/' + item.fields.id}>
