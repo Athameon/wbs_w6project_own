@@ -3,13 +3,10 @@ import blockchain_logo from "./../assets/icon_blockchain.png"
 import { Link } from 'react-router-dom';
 import "./Header.css"
 
-const Header = ({values}) => {
+const Header = ({values, content}) => {
 
 console.log("here");
 console.log(values);
-console.log(values[0].price);
-
-// console.log(prevData)  
 
   const [searchInput, setSearchInput] = useState("");
   const onSearchInputChange = ({ target }) => {
@@ -51,7 +48,11 @@ console.log(values[0].price);
         color_string
     ]);
   }
-  const cryptos = props.content && props.content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
+  const cryptos = content && content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
+
+  if (!values) {
+    return <div>Empty</div>
+  }
 
   return (
 

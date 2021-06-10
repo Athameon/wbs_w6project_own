@@ -5,7 +5,7 @@ import Crypto from './Crypto';
 import { Switch, Route } from 'react-router-dom';
 import './Main.css'
 
-const Main = ({content}) => {
+const Main = ({content, currentData}) => {
   console.log(content.items);
   return(
     <main className="mainWidth center">
@@ -14,7 +14,7 @@ const Main = ({content}) => {
           <Author {...content} />
         </Route>
         <Route path="/crypto/:id">
-          <Crypto {...content} />
+          <Crypto {...content} currentData={currentData} />
         </Route>
         <Route path="/">
           <News {...content} />
