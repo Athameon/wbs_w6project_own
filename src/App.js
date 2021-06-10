@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-// import Data from '../Mock.json';
 
 import './App.css';
 
@@ -59,7 +58,7 @@ function App() {
         .then(result => {
             console.log(result);
             if(result.ok) {
-            return result.json();
+                return result.json();
             }
             throw Error("Error");
         }, (error => {
@@ -67,9 +66,9 @@ function App() {
         }))
         .then(jsonData => {
             if (priceDelta.current !== jsonData[0].price) {
-            console.log("Update price");
-            setCurrentData(jsonData);
-            priceDelta.current = jsonData[0].price;
+                console.log("Update price");
+                setCurrentData(jsonData);
+                priceDelta.current = jsonData[0].price;
             }
             
         })
@@ -78,30 +77,30 @@ function App() {
         })
         }, 5000)
         return () => {
-        clearInterval(interval);
+            clearInterval(interval);
         }
     }, [])
 
     // hook for the fetch of the first render
     useEffect(() => {
         fetch("https://api.nomics.com/v1/currencies/ticker?key=e976e656db4b58f3a781f96a9918f6f3916e6849&ids=BTC,ETH,XRP,BCH,EOS,DOGE&convert=EUR&per-page=100&page=1", {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         })
         .then(result => {
-        console.log(result);
+            console.log(result);
         if(result.ok) {
             return result.json();
         }
         throw Error("Error");
         }, (error => {
-        throw Error("Network Error");
+            throw Error("Network Error");
         }))
         .then(jsonData => {
-        setCurrentData(jsonData);
+            setCurrentData(jsonData);
         })
         .catch(error => {
-        console.error(error);
+            console.error(error);
         })
     }, [])
 
@@ -124,38 +123,7 @@ function App() {
                     content && <Main content={content} />}
                 </Route>
             </Switch>
-
-            {values?
-            (
-            <aside>
-                <h2>Name:</h2>
-                <p>{values[0].name}</p>
-                <h2>Currency</h2>
-                <p>{values[0].currency}</p>
-                <h2>Price (€):</h2>
-                <p>{values[0].price} {prevData.current === null? "-" : values[0].price === prevData.current.price? "O" :  values[0].price > prevData.current.price? "+" : "-"}</p>
-                <p>{prevData.current && values[0].price - prevData.current.price > 0 && "+"}{prevData.current && values[0].price - prevData.current.price}</p>
-                <h2>First Trade:</h2>
-                <p>{values[0].first_trade}</p>
-                <h2>Alltime high date:</h2>
-                <p>{values[0].high_timestamp}</p>
-                <h2>Alltime high value:</h2>
-                <p>{values[0].high}</p>
-                <hr />
-                <h2>Exchange history:</h2>
-                <h3>1 Day</h3>
-                <p>{values[0]["1d"].price_change}</p>
-                <h3>7 Days</h3>
-                <p>{values[0]["7d"].price_change}</p>
-                <h3>30 Days</h3>
-                <p>{values[0]["30d"].price_change}</p>
-                <h3>356 Days</h3>
-                <p>{values[0]["365d"].price_change}</p>
-            </aside>
-            ) :
-            <p>Empty</p> 
-            }
-        <Footer />
+            <Footer />
         </div>
     );
 }
