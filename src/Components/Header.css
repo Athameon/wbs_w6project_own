@@ -45,18 +45,8 @@ table {
   margin-top: 15px;
   margin-bottom: 15px;
   font-family: "Roboto", sans-serif;
-  /* font-weight: lighter; */
 }
 
-#currency_labels {
-  color: rgb(243, 202, 37);
-}
-
-/* rgb(248,221,116) */
-
-/* .dropdown-item {
-    font-size: 18px;
-} */
 .logoText {
   color: white;
   text-decoration: none;
