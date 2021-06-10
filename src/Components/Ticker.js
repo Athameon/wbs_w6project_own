@@ -1,5 +1,6 @@
 import React from 'react';
 import LoadingComponent from './LoadingComponent';
+import { Link } from 'react-router-dom';
 import './Ticker.css'
 
 const Ticker = ({values}) => {
@@ -36,8 +37,8 @@ const Ticker = ({values}) => {
   return (
     <table className="table table-borderless fw-lighter table-xxl">
       <tbody>
-          <tr className="fs-5 row-bottom-margin" id="currency_labels">
-            {values && values.map(item => <th>{item.id}</th>)}
+          <tr className="fs-5 row-bottom-margin">
+            {values && values.map(item => <th><Link to={'/crypto/' + item.id.toLowerCase()} id="currency_labels" >{item.id}</Link></th>)}
           </tr>
           <tr className="fs-5">
             {values && values.map(item => <td>${tickerValues(values, item.id).value}</td>)}
