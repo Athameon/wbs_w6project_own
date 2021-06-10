@@ -1,35 +1,48 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Data from '../Mock.json';
 import LoadingComponent from './LoadingComponent';
+import { DateTime } from 'luxon';
 
-const CryptoInfo = () => {
+const CryptoInfo = ({cryptoInfos}) => {
+  const priceDelta = useRef(0)
+  const prevData = useRef(null);
 
-  if(values) {
+  console.log('cryptoInfos', cryptoInfos);
+
+  useEffect(() => {
+    prevData.current = cryptoInfos;
+  }, [cryptoInfos])
+
+  const currentPriceChange = prevData.current && cryptoInfos.price - prevData.current.price;
+  if (currentPriceChange !== 0) {
+    priceDelta.current = currentPriceChange;
+  }
+  
+  if(cryptoInfos) {
     return (
       <aside>
         <h2>Name:</h2>
-        <p>{values.name}</p>
+        <p>{cryptoInfos.name}</p>
         <h2>Currency</h2>
-        <p>{values.currency}</p>
+        <p>{cryptoInfos.currency}</p>
         <h2>Price (€):</h2>
-        <p>{values.price} {prevData.current === null? "-" : values.price === prevData.current.price? "O" :  values.price > prevData.current.price? "+" : "-"}</p>
-        <p>{prevData.current && values.price - prevData.current.price > 0 && "+"}{prevData.current && values.price - prevData.current.price}</p>
+        <p>{cryptoInfos.price} {prevData.current === null? "-" : currentPriceChange === 0? "O" :  currentPriceChange > 0? "+" : "-"}</p>
+        <p>{prevData.current && priceDelta.current > 0 && "+"}{priceDelta.current}</p>
         <h2>First Trade:</h2>
-        <p>{values.first_trade}</p>
+        <p>{DateTime.fromISO(cryptoInfos.first_trade).setLocale('de').toLocaleString()}</p>
         <h2>Alltime high date:</h2>
-        <p>{values.high_timestamp}</p>
+        <p>{DateTime.fromISO(cryptoInfos.high_timestamp).setLocale('de').toLocaleString()}</p>
         <h2>Alltime high value:</h2>
-        <p>{values.high}</p>
+        <p>{cryptoInfos.high}</p>
         <hr />
         <h2>Exchange history:</h2>
         <h3>1 Day</h3>
-        <p>{values["1d"].price_change}</p>
+        <p>{cryptoInfos["1d"].price_change}</p>
         <h3>7 Days</h3>
-        <p>{values["7d"].price_change}</p>
+        <p>{cryptoInfos["7d"].price_change}</p>
         <h3>30 Days</h3>
-        <p>{values["30d"].price_change}</p>
+        <p>{cryptoInfos["30d"].price_change}</p>
         <h3>356 Days</h3>
-        <p>{values["365d"].price_change}</p>
+        <p>{cryptoInfos["365d"].price_change}</p>
       </aside>
     )
   } else {

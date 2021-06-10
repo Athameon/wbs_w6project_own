@@ -6,7 +6,7 @@ import marked from 'marked'
 import './Crypto.css'
 
 
-const Crypto = ({items}) => {
+const Crypto = ({items, currentData}) => {
   const { id } = useParams();
   console.log(id);
   const crypto = items.filter(item => item.sys.contentType.sys.id === 'crypto')
@@ -15,12 +15,14 @@ const Crypto = ({items}) => {
 
   const image = crypto.fields.image.fields;
   console.log(image.file.url);
+
+  const currentCryptoInfo = currentData && currentData.filter(item => item.id.toLowerCase() === id)[0];
   
   if (crypto) {
     return (
       <div className='cryptoContainer'>
         <div className='cryptoInfoContainer'>
-          <CryptoInfo />
+          <CryptoInfo cryptoInfos={currentCryptoInfo} />
         </div>
         <div className='cryptoDescription'>
           <h1>{crypto.fields.title}</h1>

@@ -17,15 +17,9 @@ function App() {
     const [isError, setIsError] = useState(false);
 
     //State for the current prices from 
-    const [values, setCurrentData] = useState(null);
+    const [currentData, setCurrentData] = useState(null);
     const priceDelta = useRef(0)
-    const prevData = useRef(null);
-    // setCurrentData(Data);
   
-    console.log("hello");
-    console.log(prevData);
-    console.log(values);
-
     // hook for getting content from Contentful
     useEffect(() => {
         setIsLoading(true);
@@ -103,15 +97,10 @@ function App() {
             console.error(error);
         })
     }, [])
-
-    useEffect(() => {
-        prevData.current = values;
-    }, [values])
-
  
     return (
         <div>
-            <Header values={values} />
+            <Header values={currentData} {...content} />
             <Switch>
                 <Route path="/error" component={Error} />
                 <Route path="/">
@@ -119,7 +108,7 @@ function App() {
                     <LoadingComponent /> :
                     isError?
                     <Redirect to="/error" /> :
-                    content && <Main content={content} />}
+                    content && <Main content={content} currentData={currentData} />}
                 </Route>
             </Switch>
             <Footer />
