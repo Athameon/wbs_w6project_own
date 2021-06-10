@@ -7,7 +7,7 @@ export default class LoadingComponent extends React.Component {
       <div style={{textAlign: 'center', marginTop: '50px'}}>
         <Loader
           type="Puff"
-          color="#00BFFF"
+          color="#332c57"
           height={200}
           width={200}
         />

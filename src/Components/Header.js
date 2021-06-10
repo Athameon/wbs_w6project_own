@@ -3,15 +3,58 @@ import blockchain_logo from "./../assets/icon_blockchain.png"
 import { Link } from 'react-router-dom';
 import "./Header.css"
 
-const Header = (props) => {
+const Header = ({values}) => {
+
+console.log("here");
+console.log(values);
+console.log(values[0].price);
+
+// console.log(prevData)  
+
   const [searchInput, setSearchInput] = useState("");
   const onSearchInputChange = ({ target }) => {
     setSearchInput(target.value);
   };
 
+  function tickerValues (values,id){
+
+    let coin_index;
+    
+    if (id==="BTC"){coin_index = 0} else
+    if (id==="ETH"){coin_index = 1} else
+    if (id==="DOGE"){coin_index = 2} else
+    if (id==="XRP"){coin_index = 3} else
+    if (id==="BCH"){coin_index = 4} else
+    if (id==="EOS"){coin_index = 5} else
+
+    console.log(coin_index);
+
+    let currentValueCrypto = parseFloat(values[coin_index].price)
+
+    if (currentValueCrypto < 1000.0) {
+        currentValueCrypto = parseFloat(values[coin_index].price).toFixed(2)}
+    else{
+        currentValueCrypto = parseFloat(values[coin_index].price).toFixed(0)
+    }
+
+    currentValueCrypto = currentValueCrypto.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+     
+    let oneDayPctChange = (parseFloat(values[coin_index]["1d"].price_change_pct)*100.0).toFixed(2) ;
+
+    let color_string;
+
+    oneDayPctChange >= 0 ? color_string = "green" : color_string = "red";
+
+    return ([
+        currentValueCrypto,
+        oneDayPctChange,
+        color_string
+    ]);
+  }
   const cryptos = props.content && props.content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
 
   return (
+
     <header>
 
       <div className="prenav">
@@ -32,7 +75,7 @@ const Header = (props) => {
         
         <div className="nav_ticker">
 
-            <div class="table-responsive-l">
+            <div className="table-responsive-l">
                 <table className="table table-borderless fw-lighter table-xxl">
                     <tbody>
                         <tr className="fs-5 row-bottom-margin" id="currency_labels">
@@ -47,23 +90,23 @@ const Header = (props) => {
 
                     <tbody>
                         <tr className="fs-5">
-                            <th>$1.00</th>
-                            <th>$2.00</th>
-                            <th>$3.00</th>
-                            <th>$4.00</th>
-                            <th>$5.00</th>
-                            <th>$6.00</th>
+                            <th>${tickerValues(values,"BTC")[0]}</th>
+                            <th>${tickerValues(values,"ETH")[0]}</th>
+                            <th>${tickerValues(values,"XRP")[0]}</th>
+                            <th>${tickerValues(values,"BCH")[0]}</th>
+                            <th>${tickerValues(values,"EOS")[0]}</th>
+                            <th>${tickerValues(values,"DOGE")[0]}</th>
                         </tr>
                     </tbody>
 
                     <tbody>
                         <tr className="fs-6">
-                            <th>+0.1%</th>
-                            <th>-0.2%</th>
-                            <th>+0.3%</th>
-                            <th>-0.4%</th>
-                            <th>+0.5%</th>
-                            <th>-0.6%</th>
+                            <th style={{color: tickerValues(values,"BTC")[2]}}>{tickerValues(values,"BTC")[1]}%</th>
+                            <th style={{color: tickerValues(values,"ETH")[2]}}>{tickerValues(values,"ETH")[1]}%</th>
+                            <th style={{color: tickerValues(values,"XRP")[2]}}>{tickerValues(values,"XRP")[1]}%</th>
+                            <th style={{color: tickerValues(values,"BCH")[2]}}>{tickerValues(values,"BCH")[1]}%</th>
+                            <th style={{color: tickerValues(values,"EOS")[2]}}>{tickerValues(values,"EOS")[1]}%</th>
+                            <th style={{color: tickerValues(values,"DOGE")[2]}}>{tickerValues(values,"DOGE")[1]}%</th>
                         </tr>
                     </tbody>
                 </table>

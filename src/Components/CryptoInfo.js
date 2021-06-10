@@ -3,70 +3,7 @@ import Data from '../Mock.json';
 import LoadingComponent from './LoadingComponent';
 
 const CryptoInfo = () => {
-  const [values, setCurrentData] = useState(null);
-  const priceDelta = useRef(0)
-  const prevData = useRef(null);
-  // setCurrentData(Data);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("Trigger fetch data from api.");
-      fetch("https://api.nomics.com/v1/currencies/ticker?key=e976e656db4b58f3a781f96a9918f6f3916e6849&ids=BTC,ETH,XRP&convert=EUR&per-page=100&page=1", {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      })
-      .then(result => {
-        console.log(result);
-        if(result.ok) {
-          return result.json();
-        }
-        throw Error("Error");
-      }, (error => {
-        throw Error("Network Error");
-      }))
-      .then(jsonData => {
-        if (priceDelta.current !== jsonData[0].price) {
-          console.log("Update price");
-          setCurrentData(jsonData[0]);
-          priceDelta.current = jsonData[0].price;
-        }
-        
-      })
-      .catch(error => {
-        console.error("Failed to fetch the data.");
-      })
-    }, 5000)
-    return () => {
-      clearInterval(interval);
-    }
-  }, [])
-
-  useEffect(() => {
-    fetch("https://api.nomics.com/v1/currencies/ticker?key=e976e656db4b58f3a781f96a9918f6f3916e6849&ids=BTC,ETH,XRP&convert=EUR&per-page=100&page=1", {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    })
-    .then(result => {
-      console.log(result);
-      if(result.ok) {
-        return result.json();
-      }
-      throw Error("Error");
-    }, (error => {
-      throw Error("Network Error");
-    }))
-    .then(jsonData => {
-      setCurrentData(jsonData[0]);
-    })
-    .catch(error => {
-      console.error(error);
-    })
-  }, [])
-
-  useEffect(() => {
-    prevData.current = values;
-  }, [values])
-  
   if(values) {
     return (
       <aside>
@@ -103,7 +40,6 @@ const CryptoInfo = () => {
       </>
     )
   }
-
 }
 
 export default CryptoInfo;
