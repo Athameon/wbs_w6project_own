@@ -5,10 +5,6 @@ import "./Header.css"
 import Ticker from "./Ticker";
 
 const Header = ({values, content}) => {
-
-console.log("here");
-console.log('values', values);
-
   const [searchInput, setSearchInput] = useState("");
   const onSearchInputChange = ({ target }) => {
     setSearchInput(target.value);
