@@ -72,7 +72,7 @@ const Header = ({values, content}) => {
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   {cryptos && cryptos.map(item => {
                     return (
-                      <li>
+                      <li key ={item.fields.id}>
                         <Link to={'/crypto/' + item.fields.id}>
                           <span>{item.fields.title}</span>
                         </Link>

@@ -38,13 +38,13 @@ const Ticker = ({values}) => {
     <table className="table table-borderless fw-lighter table-xxl">
       <tbody>
           <tr className="fs-5 row-bottom-margin">
-            {values && values.map(item => <th><Link to={'/crypto/' + item.id.toLowerCase()} id="currency_labels" >{item.id}</Link></th>)}
+            {values && values.map(item => <th key={'title_' + item.id}><Link to={'/crypto/' + item.id.toLowerCase()} id="currency_labels" >{item.id}</Link></th>)}
           </tr>
           <tr className="fs-5">
-            {values && values.map(item => <td>${tickerValues(values, item.id).value}</td>)}
+            {values && values.map(item => <td key={'value_' + item.id}>€{tickerValues(values, item.id).value}</td>)}
           </tr>
           <tr className="fs-6">
-            {values && values.map(item => <td style={{color: tickerValues(values, item.id).color}}>{tickerValues(values, item.id).dayDelta}%</td>)}
+            {values && values.map(item => <td key={'change_' + item.id} style={{color: tickerValues(values, item.id).color}}>{tickerValues(values, item.id).dayDelta}%</td>)}
           </tr>
       </tbody>
   </table>

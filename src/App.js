@@ -8,7 +8,6 @@ import Header from './Components/Header';
 import Main from './Components/Main';
 import Error from './Components/Error';
 import LoadingComponent from './Components/LoadingComponent'
-
 import Client from './client';
 
 function App() {
@@ -19,6 +18,7 @@ function App() {
     //State for the current prices from 
     const [currentData, setCurrentData] = useState(null);
     const priceDelta = useRef(0)
+    const [coins, setCoins] = useState("BTC,ETH,XRP,BCH,EOS,DOGE,ADA,DOT")
   
     // hook for getting content from Contentful
     useEffect(() => {
@@ -45,7 +45,8 @@ function App() {
     useEffect(() => {
         const interval = setInterval(() => {
         console.log("Trigger fetch data from api.");
-        fetch("https://api.nomics.com/v1/currencies/ticker?key=e976e656db4b58f3a781f96a9918f6f3916e6849&ids=BTC,ETH,XRP,BCH,EOS,DOGE&convert=EUR&per-page=100&page=1", {
+        const nomicApiUrl = process.env.REACT_APP_NOMICS_API_URL + "?key=" + process.env.REACT_APP_NOMICS_API_KEY +  "&ids=" + coins + "&convert=EUR&per-page=100&page=1";
+        fetch(nomicApiUrl, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         })
@@ -73,11 +74,12 @@ function App() {
         return () => {
             clearInterval(interval);
         }
-    }, [])
+    }, [coins])
 
     // hook for the fetch of the first render
     useEffect(() => {
-        fetch("https://api.nomics.com/v1/currencies/ticker?key=e976e656db4b58f3a781f96a9918f6f3916e6849&ids=BTC,ETH,XRP,BCH,EOS,DOGE&convert=EUR&per-page=100&page=1", {
+        const nomicApiUrl = process.env.REACT_APP_NOMICS_API_URL + "?key=" + process.env.REACT_APP_NOMICS_API_KEY +  "&ids=" + coins + "&convert=EUR&per-page=100&page=1";
+        fetch(nomicApiUrl, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         })

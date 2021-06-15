@@ -12,7 +12,7 @@ const Crypto = ({items, currentData}) => {
     .filter(item => item.fields.id === id)[0];
   console.log(crypto);
 
-  const image = crypto && crypto.fields.image.fields;
+  const image = crypto && crypto.fields.image && crypto.fields.image.fields;
   console.log(image && image.file.url);
 
   const currentCryptoInfo = currentData && currentData.filter(item => item.id.toLowerCase() === id)[0];
@@ -26,7 +26,7 @@ const Crypto = ({items, currentData}) => {
         {crypto ?
           <div>
             <h1>{crypto.fields.title}</h1>
-            <img src={image.file.url} alt={image.title} />
+            <img src={image && image.file.url} alt={image && image.title} />
             <section dangerouslySetInnerHTML={{ __html: marked(crypto.fields.description)}} />
           </div>
         :
