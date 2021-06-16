@@ -21,12 +21,17 @@ const Ticker = ({values}) => {
 
     let color_string;
 
-    oneDayPctChange >= 0 ? color_string = "green" : color_string = "red";
+    let sign_string;
+
+    oneDayPctChange >= 0 ? sign_string = "+" : sign_string = "";
+
+    oneDayPctChange >= 0 ? color_string = "green" : color_string = "rgb(218,44,67)";
 
     return ({
         value: currentValueCrypto,
         dayDelta: oneDayPctChange,
-        color: color_string
+        color: color_string,
+        sign: sign_string
     });
   }
 
@@ -38,13 +43,13 @@ const Ticker = ({values}) => {
     <table className="table table-borderless fw-lighter table-xxl">
       <tbody>
           <tr className="fs-5 row-bottom-margin">
-            {values && values.map(item => <th key={'title_' + item.id}><Link to={'/crypto/' + item.id.toLowerCase()} id="currency_labels" >{item.id}</Link></th>)}
+            {values && values.map(item => <th className="ps-4" key={'title_' + item.id}><Link to={'/crypto/' + item.id.toLowerCase()} id="currency_labels" >{item.id}</Link></th>)}
           </tr>
           <tr className="fs-5">
-            {values && values.map(item => <td key={'value_' + item.id}>€{tickerValues(values, item.id).value}</td>)}
+            {values && values.map(item => <td className="ps-4" key={'value_' + item.id}>€{tickerValues(values, item.id).value}</td>)}
           </tr>
           <tr className="fs-6">
-            {values && values.map(item => <td key={'change_' + item.id} style={{color: tickerValues(values, item.id).color}}>{tickerValues(values, item.id).dayDelta}%</td>)}
+            {values && values.map(item => <td className="ps-4" key={'change_' + item.id} style={{color: tickerValues(values, item.id).color}}>{tickerValues(values, item.id).sign}{tickerValues(values, item.id).dayDelta}%</td>)}
           </tr>
       </tbody>
   </table>
