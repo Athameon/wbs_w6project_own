@@ -19,8 +19,10 @@ const Crypto = ({items, currentData}) => {
 
   return (
     <div className='cryptoContainer'>
-      <div className='cryptoInfoContainer'>
-        <CryptoInfo cryptoInfos={currentCryptoInfo} />
+      <div>
+        <div className='cryptoInfoContainer'>
+          <CryptoInfo cryptoInfos={currentCryptoInfo} />
+        </div>
       </div>
       <div className='cryptoDescription'>
         {crypto ?

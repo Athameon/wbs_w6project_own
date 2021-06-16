@@ -11,58 +11,49 @@ const Header = ({values, content}) => {
   };
 
   const cryptos = content && content.items.filter(item => item.sys.contentType.sys.id === 'crypto');
+  const authors = content && content.items.filter(item => item.sys.contentType.sys.id === 'author');
 
   return (
 
     <header>
+        <div className="prenav_background">
+            <div className="prenav">
+                <div className='logo'>
+                    <Link className="logoImage" to='/'>
+                        <img src={blockchain_logo} alt="blockchain logo" id="blchainlogo"/>
+                    </Link>
+                    
+                    <Link className="logoText" to='/'>
+                        <div className="container">
+                            <div className="row">
+                                <h1>The Daily Crypto</h1>
+                            </div>
+                            <div className="row fs-6">
+                                <h3 className="fs-6 text-end">Powered by React & Contentful</h3>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+                
+                <div className="nav_ticker">
 
-        <div className="prenav">
-            <Link className="logoImage" to='/'>
-                <img src={blockchain_logo} alt="blockchain logo" id="blchainlogo"/>
-            </Link>
-            
-            <Link className="logoText" to='/'>
-                <div className="container">
-                    <div className="row">
-                        <h1>The Daily Crypto</h1>
-                    </div>
-                    <div className="row fs-6">
-                        <h3 className="fs-6 text-end">Powered by React & Contentful</h3>
+                    <div className="table-responsive-l">
+                        <Ticker values={values} />
                     </div>
                 </div>
-            </Link>
-            
-            <div className="nav_ticker">
 
-                <div className="table-responsive-l">
-                    <Ticker values={values} />
-                </div>
+                {/* <div className="nav_links"></div> */}
+
             </div>
-
-            {/* <div className="nav_links"></div> */}
-
         </div>
 
         <nav className="navbar navbar-expand-lg">
 
             <div className="navbar-content">
 
-                    {/* <div className="navbar-brand">ToDO: Name</div> */}
                 <div className="menus">
-                
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
 
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div className="navbar-collapse navbar-expand-sm" id="navbarSupportedContent">
                 
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             
@@ -82,7 +73,7 @@ const Header = ({values, content}) => {
                                         return (
                                         <li key ={item.fields.id}>
                                             <Link to={'/crypto/' + item.fields.id}>
-                                            <span>{item.fields.title}</span>
+                                            <p>{item.fields.title}</p>
                                             </Link>
                                         </li>
                                         )
@@ -102,17 +93,15 @@ const Header = ({values, content}) => {
                                 </div>
 
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li>
-                                        <div className="dropdown-item" name="second">
-                                            Ben
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div className="dropdown-item" name="second">
-                                            Eddy
-                                        </div>
-                                    </li>
+                                    {authors && authors.map(item => {
+                                        return (
+                                        <li key ={item.fields.name}>
+                                            <Link to={'/authors/' + item.fields.name}>
+                                            <p>{item.fields.name}</p>
+                                            </Link>
+                                        </li>
+                                        )
+                                    })}
                                 </ul>
                             </li>
                     

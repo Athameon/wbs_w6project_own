@@ -6,6 +6,11 @@
   width: 500px;
   margin: 0 auto;
 }
+@media screen and (max-width: 850px) {
+  .cryptoDescription img {
+    width: 300px;
+  }
+}
 .cryptoDescription p {
   margin-top: 20px;
   font-size: 18px;
