@@ -24,20 +24,27 @@ function App() {
     useEffect(() => {
         setIsLoading(true);
         setIsError(false);
-        
-        Client.getEntries()
+
+        fetch("http://localhost:3030")
         .then(result => {
-        console.log(result);
-        setIsLoading(false);
-        setContent(result);
+            console.log('result', result);
+            if (result) {
+                return result.json();
+            }
+            throw Error("Failed to get the data");
         }, (error) => {
-        throw Error("Network Error." + error)
+            throw Error("Network Error." + error)
+        })
+        .then(jsonResult => {
+            console.log(jsonResult);
+            setIsLoading(false);
+            setContent(jsonResult);
         })
         .catch(error => {
-        console.log("Error occured");
-        console.error(error);
-        setIsLoading(false);
-        setIsError(true);
+            console.log("Error occured");
+            console.error(error);
+            setIsLoading(false);
+            setIsError(true);
         })
     }, [])
 
