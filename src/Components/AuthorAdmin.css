@@ -1,0 +1,48 @@
+.author {
+  margin: 20px auto;
+  padding: 15px;
+  border: solid 5px #332c57;
+  box-shadow: 10px 10px 15px #e9ce62;
+  border-radius: 20px;
+  background-color: #eeeeee;
+}
+
+.autorInfo {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.editButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.authorName {
+  font-size: 28px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  background-color: inherit;
+  border: none;
+}
+
+textarea {
+  height: 200px;
+  width: 100%;
+  background-color: inherit;
+  border: none;
+}
+
+.imageFile {
+  margin: 0 auto;
+  display: block;
+}
+
+.saveButton {
+  text-align: end;
+  display: block;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+}

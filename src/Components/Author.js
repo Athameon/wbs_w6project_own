@@ -1,28 +1,76 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import marked from 'marked'
-import './Author.css'
-import News from './News';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import marked from "marked";
+import "./Author.css";
+import News from "./News";
+import LoadingComponent from "./LoadingComponent";
+import ErrorComponent from "./Error";
 
-const Author = ({items}) => {
-  const { name } = useParams();
-  const author = items.filter(item => item.sys.contentType.sys.id === 'author')
-    .filter(item => item.fields.name === name)[0];
-  
-  const picture = author.fields.profilePicture.fields.file.url;
-  const itemsByAuthor = items.filter(item => item.fields.author && item.fields.author.fields.name === name);
+const Author = ({ searchResult }) => {
+  const [author, setAuthor] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  return( 
-    <>
-      <h1>{author.fields.name}</h1>
-      <img className='profilePicture' src={picture && picture} alt={author && author.name} />
-      <section className='aboutText' dangerouslySetInnerHTML={{ __html: marked(author.fields.about)}} />
-      <hr className='articleSeparator' />
-      <h2>Articles composed by {name}:</h2>
+  let { name } = useParams();
+  if (name === undefined) {
+    name = searchResult.name;
+  }
 
-      <News items={itemsByAuthor} />
-    </>
-  )
-}
+  useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
+
+    fetch("http://localhost:3030/author/" + name)
+      .then(
+        (result) => {
+          if (result) {
+            return result.json();
+          }
+          throw Error("Failed to get the data");
+        },
+        (error) => {
+          throw Error("Network Error." + error);
+        }
+      )
+      .then((jsonResult) => {
+        console.log("Author: ", jsonResult);
+        setIsLoading(false);
+        setAuthor(jsonResult);
+      })
+      .catch((error) => {
+        console.log("Error occured");
+        console.error(error);
+        setIsLoading(false);
+        setIsError(true);
+      });
+  }, [name]);
+
+  if (isLoading) {
+    return <LoadingComponent />;
+  } else if (isError) {
+    return <ErrorComponent />;
+  } else if (author) {
+    return (
+      <>
+        <h1>{author.author.name}</h1>
+        <img
+          className="profilePicture"
+          src={author.author.image}
+          alt={author.author.name}
+        />
+        <section
+          className="aboutText"
+          dangerouslySetInnerHTML={{ __html: marked(author.author.about) }}
+        />
+        <hr className="articleSeparator" />
+        <h2>Articles composed by {name}:</h2>
+
+        <News posts={author.posts} />
+      </>
+    );
+  } else {
+    return <p></p>;
+  }
+};
 
 export default Author;
